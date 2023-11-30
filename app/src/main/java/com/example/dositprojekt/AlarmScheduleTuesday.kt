@@ -16,6 +16,9 @@ import com.example.dositprojekt.databinding.ActivityAlarmScheduleTuesdayBinding
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import java.util.Calendar
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
+import android.widget.Button
 
 
 class AlarmScheduleTuesday : AppCompatActivity() {
@@ -34,11 +37,22 @@ class AlarmScheduleTuesday : AppCompatActivity() {
 
         // Get the selected day from the intent
         val selectedDay = intent.getStringExtra("selected_day") ?: "Friday"
+        val open2 = findViewById<Button>(R.id.open2)
+        val close2 = findViewById<Button>(R.id.close2)
+        open2.setOnClickListener {
+            open2.visibility = INVISIBLE
+            close2.visibility = VISIBLE
+
+        }
+        close2.setOnClickListener {
+            close2.visibility = INVISIBLE
+            open2.visibility = VISIBLE
+        }
 
         val sharedPref = getPreferences(Context.MODE_PRIVATE)
         val hour = sharedPref.getInt("hour", 12) // Default to 12 if not found
         val minute = sharedPref.getInt("minute", 0) // Default to 0 if not found
-        val amPm = sharedPref.getString("am_pm", "AM") // Default to AM if not found
+        val amPm = sharedPref.getString("am_pm", "PM") // Default to AM if not found
 
         // Update your UI with the retrieved alarm information
         binding.SelectedTime2.text = String.format("%02d", hour) + ":" + String.format("%02d", minute) + " $amPm"

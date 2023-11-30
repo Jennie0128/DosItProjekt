@@ -84,13 +84,31 @@
 
     <Button
         android:id="@+id/open2"
-        android:layout_width="150dp"
+        android:layout_width="160dp"
         android:layout_height="70dp"
         android:backgroundTint="@color/green2"
         android:text="OPEN"
         android:textColor="@color/white"
         android:textSize="34sp"
         android:textStyle="bold"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.844" />
+
+    <Button
+        android:id="@+id/close2"
+        android:layout_width="160dp"
+        android:layout_height="70dp"
+        android:backgroundTint="@android:color/holo_red_light"
+        android:text="CLOSE"
+        android:textColor="@color/white"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

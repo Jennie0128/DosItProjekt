@@ -10,12 +10,17 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.service.voice.VoiceInteractionSession.VisibleActivityCallback
+import android.widget.Button
 import android.widget.Toast
+import androidx.annotation.VisibleForTesting
 import androidx.core.content.ContextCompat
 import com.example.dositprojekt.databinding.ActivityAlarmScheduleMondayBinding
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import java.util.Calendar
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 
 class AlarmScheduleMonday : AppCompatActivity() {
     private lateinit var binding: ActivityAlarmScheduleMondayBinding
@@ -35,11 +40,23 @@ class AlarmScheduleMonday : AppCompatActivity() {
         // Get the selected day from the intent
         val selectedDay = intent.getStringExtra("selected_day") ?: "Friday"
 
+        val open = findViewById<Button>(R.id.open)
+        val close = findViewById<Button>(R.id.close)
+        open.setOnClickListener {
+            open.visibility = INVISIBLE
+            close.visibility = VISIBLE
+
+        }
+        close.setOnClickListener {
+            close.visibility = INVISIBLE
+            open.visibility = VISIBLE
+        }
+
         // Retrieve stored alarm information from SharedPreferences
         val sharedPref = getPreferences(Context.MODE_PRIVATE)
         val hour = sharedPref.getInt("hour", 12) // Default to 12 if not found
         val minute = sharedPref.getInt("minute", 0) // Default to 0 if not found
-        val amPm = sharedPref.getString("am_pm", "AM") // Default to AM if not found
+        val amPm = sharedPref.getString("am_pm", "PM") // Default to AM if not found
 
         // Update your UI with the retrieved alarm information
         binding.SelectedTime.text = String.format("%02d", hour) + ":" + String.format("%02d", minute) + " $amPm"
